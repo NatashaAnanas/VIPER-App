@@ -1,4 +1,4 @@
-//  
+//
 //  MainViewController.swift
 //  VIPER App
 //
@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainViewController: UIViewController {
-
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -89,11 +89,20 @@ extension MainViewController: MainViewInput {
     }
     
     func updateImage(_ image: UIImage?, at index: Int) {
-        let indexPath = IndexPath(row: index, section: 0)
-        guard let cell = tableView.cellForRow(at: indexPath) as? MainTableViewCell else {
-            return
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            let indexPath = IndexPath(row: index, section: 0)
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? MainTableViewCell else {
+                return
+            }
+            
+            guard self.tableView.indexPathsForVisibleRows?.contains(indexPath) == true else {
+                return
+            }
+            
+            cell.setImage(image)
         }
-        cell.setImage(image)
     }
     
     func updateView() {

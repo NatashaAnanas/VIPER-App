@@ -14,6 +14,4 @@ protocol MainInteractorInput {
     func fetchInfo(completion: @escaping (Result<MainModel, NetworkError>) -> ())
     
     func getCachedImage(for urlString: String) -> UIImage?
-    
-    func cachedImage(from url: String) -> UIImage?
 }

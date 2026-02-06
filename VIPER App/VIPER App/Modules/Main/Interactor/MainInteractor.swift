@@ -12,8 +12,6 @@ final class MainInteractor: MainInteractorInput {
     private let networkService: NetworkServiceProtocol
     private let imageLoaderService: ImageLoaderServiceProtocol
     
-    private var imageCache: [String: UIImage] = [:]
-    
     init(networkService: NetworkServiceProtocol,
          imageLoaderService: ImageLoaderServiceProtocol) {
         self.networkService = networkService
@@ -30,10 +28,6 @@ final class MainInteractor: MainInteractorInput {
                 completion(.failure(error))
             }
         }
-    }
-    
-    func cachedImage(from url: String) -> UIImage? {
-        imageCache[url]
     }
     
     func getCachedImage(for urlString: String) -> UIImage? {
