@@ -15,9 +15,8 @@ final class MainRouter: MainRouterInput {
         self.transitionHandler = transitionHandler
     }
     
-    func push(with images: UIImage) {
-        // тут надовызывать builder нового экрана, который возвращает новый UIViewController
-        let viewController = ViewController() // это убрать
+    func push(with image: UIImage) {
+        let viewController = DetailViewConfigurator().configure(image: image)
         
         viewController.modalPresentationStyle = .fullScreen
         transitionHandler?.pushView(viewController, animated: true)

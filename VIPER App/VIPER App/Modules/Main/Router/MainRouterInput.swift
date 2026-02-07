@@ -9,7 +9,7 @@ import UIKit
 
 protocol MainRouterInput: AnyObject {
     
-    func push(with images: UIImage)
+    func push(with image: UIImage)
     
     func presentBottomSheet(_ view: UIViewController, height: Int)
     
