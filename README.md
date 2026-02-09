@@ -87,3 +87,4 @@ struct RandomDogModel: Codable {
 - NSCache для кэширования изображений
 - Auto Layout через NSLayoutConstraint
 
+https://github.com/user-attachments/assets/9af8c250-cb4b-42b6-991c-f5916deeb1f1
