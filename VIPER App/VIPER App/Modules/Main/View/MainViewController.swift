@@ -110,6 +110,18 @@ extension MainViewController: MainViewInput {
             self.tableView.reloadData()
         }
     }
+    
+    func showError(_ message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(
+                title: "Ошибка",
+                message: message,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        }
+    }
 }
 
 extension UIViewController: TransitionHandler {

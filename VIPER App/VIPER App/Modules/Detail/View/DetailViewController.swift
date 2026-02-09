@@ -17,7 +17,7 @@ final class DetailViewController: UIViewController {
         
         return imageView
     }()
-
+    
     private let randomDogImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -26,7 +26,7 @@ final class DetailViewController: UIViewController {
         
         return imageView
     }()
-
+    
     private let randomDogButton : UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Get Random Photo", for: .normal)
@@ -45,7 +45,7 @@ final class DetailViewController: UIViewController {
     private func addAllSubviews() {
         view.addSubviews(dogImageView, randomDogButton, randomDogImageView)
     }
-
+    
     private func setupUI() {
         view.backgroundColor = .white
         randomDogButton.addTarget(
@@ -70,12 +70,28 @@ extension DetailViewController: DetailViewInput {
         setupConstraints()
     }
     
-    func updateView(image: UIImage) {
-        dogImageView.image = image
+    func showInitialImage(_ image: UIImage) {
+        DispatchQueue.main.async {
+            self.dogImageView.image = image
+        }
     }
     
-    func updateRandomImage(randomImage: UIImage) {
-        randomDogImageView.image = randomImage
+    func showRandomImage(_ image: UIImage) {
+        DispatchQueue.main.async {
+            self.randomDogImageView.image = image
+        }
+    }
+    
+    func showError(_ message: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(
+                title: "Ошибка",
+                message: message,
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        }
     }
 }
 

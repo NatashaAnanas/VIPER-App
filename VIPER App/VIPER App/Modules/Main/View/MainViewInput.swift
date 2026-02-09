@@ -14,4 +14,6 @@ protocol MainViewInput: AnyObject {
     func updateView()
     
     func updateImage(_ image: UIImage?, at index: Int)
+    
+    func showError(_ message: String)
 }

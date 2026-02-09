@@ -35,7 +35,7 @@ extension DetailPresenter: DetailViewOutput {
         view?.setupInitialState()
         
         if let image {
-            view?.updateView(image: image)
+            view?.showInitialImage(image)
         }
         fetchRandomImage()
     }
@@ -46,10 +46,10 @@ extension DetailPresenter: DetailViewOutput {
             case .success(let model):
                 self?.interactor.loadImage(from: model.message) { image in
                     guard let image else { return }
-                    self?.view?.updateRandomImage(randomImage: image)
+                    self?.view?.showRandomImage(image)
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                self?.view?.showError(error.localizedDescription)
             }
         }
     }

@@ -26,16 +26,11 @@ protocol NetworkServiceProtocol {
 
 final class NetworkService: NetworkServiceProtocol {
     
-    static let shared = NetworkService()
+    private let session: URLSession
     
-    private init() {}
-    
-    private let session: URLSession = {
-        let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 40
-        config.timeoutIntervalForResource = 40
-        return URLSession(configuration: config)
-    }()
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
     
     // MARK: - Request
     
