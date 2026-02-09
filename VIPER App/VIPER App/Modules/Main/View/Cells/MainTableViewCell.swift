@@ -62,12 +62,12 @@ final class MainTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             mainImageView.widthAnchor.constraint(equalToConstant: 100),
             mainImageView.heightAnchor.constraint(equalToConstant: 100),
-            mainImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
-            mainImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            mainImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+            mainImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .spacingSmall),
+            mainImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .spacingLarge),
+            mainImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.spacingSmall),
             
-            mainLabel.leadingAnchor.constraint(equalTo: mainImageView.trailingAnchor, constant: 8),
-            mainLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            mainLabel.leadingAnchor.constraint(equalTo: mainImageView.trailingAnchor, constant: .spacingMedium),
+            mainLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.spacingLarge),
             mainLabel.centerYAnchor.constraint(equalTo: mainImageView.centerYAnchor),
         ])
     }

@@ -101,19 +101,19 @@ extension DetailViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            dogImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            dogImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            dogImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            dogImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .spacingLarge),
+            dogImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .spacingLarge),
+            dogImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.spacingLarge),
             dogImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
             
-            randomDogButton.topAnchor.constraint(equalTo: dogImageView.bottomAnchor, constant: 16),
+            randomDogButton.topAnchor.constraint(equalTo: dogImageView.bottomAnchor, constant: .spacingLarge),
             randomDogButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             randomDogButton.heightAnchor.constraint(equalToConstant: 44),
             
-            randomDogImageView.topAnchor.constraint(equalTo: randomDogButton.bottomAnchor, constant: 16),
-            randomDogImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            randomDogImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            randomDogImageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            randomDogImageView.topAnchor.constraint(equalTo: randomDogButton.bottomAnchor, constant: .spacingLarge),
+            randomDogImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .spacingLarge),
+            randomDogImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.spacingLarge),
+            randomDogImageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -.spacingLarge)
         ])
     }
 }
