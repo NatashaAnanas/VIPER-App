@@ -10,4 +10,6 @@ import Foundation
 protocol DetailViewOutput {
     
     func viewIsReady()
+    
+    func fetchRandomImage()
 }

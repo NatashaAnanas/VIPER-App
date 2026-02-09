@@ -1,4 +1,4 @@
-//  
+//
 //  DetailViewController.swift
 //  VIPER App
 //
@@ -14,7 +14,25 @@ final class DetailViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .clear
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
         return imageView
+    }()
+
+    private let randomDogImageView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .clear
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return imageView
+    }()
+
+    private let randomDogButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Get Random Photo", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
     }()
     
     var output: DetailViewOutput?
@@ -25,11 +43,20 @@ final class DetailViewController: UIViewController {
     }
     
     private func addAllSubviews() {
-        view.addSubviews(dogImageView)
+        view.addSubviews(dogImageView, randomDogButton, randomDogImageView)
     }
-    
+
     private func setupUI() {
         view.backgroundColor = .white
+        randomDogButton.addTarget(
+            self,
+            action: #selector(tapOnRandomDogButton),
+            for: .touchUpInside
+        )
+    }
+    
+    @objc private func tapOnRandomDogButton() {
+        output?.fetchRandomImage()
     }
 }
 
@@ -43,10 +70,12 @@ extension DetailViewController: DetailViewInput {
         setupConstraints()
     }
     
-    func updateView(_ image: UIImage) {
-        DispatchQueue.main.async {
-            self.dogImageView.image = image
-        }
+    func updateView(image: UIImage) {
+        dogImageView.image = image
+    }
+    
+    func updateRandomImage(randomImage: UIImage) {
+        randomDogImageView.image = randomImage
     }
 }
 
@@ -56,14 +85,19 @@ extension DetailViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            dogImageView
-                .topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 36),
-            dogImageView
-                .bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -36),
-            dogImageView
-                .leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            dogImageView
-                .trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            dogImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            dogImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            dogImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            dogImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
+            
+            randomDogButton.topAnchor.constraint(equalTo: dogImageView.bottomAnchor, constant: 16),
+            randomDogButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            randomDogButton.heightAnchor.constraint(equalToConstant: 44),
+            
+            randomDogImageView.topAnchor.constraint(equalTo: randomDogButton.bottomAnchor, constant: 16),
+            randomDogImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            randomDogImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            randomDogImageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
         ])
     }
 }

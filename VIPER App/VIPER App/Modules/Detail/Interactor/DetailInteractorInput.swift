@@ -5,9 +5,11 @@
 //  Created by Наталья Коновалова on 07.02.2026.
 //
 
-import Foundation
+import UIKit
 
 protocol DetailInteractorInput {
     
-    func fetchObject(completion: @escaping (Result<[Object], Error>) -> ())
+    func loadImage(from urlString: String, completion: @escaping (UIImage?) -> Void)
+    
+    func fetchInfo(completion: @escaping (Result<RandomDogModel, NetworkError>) -> ())
 }

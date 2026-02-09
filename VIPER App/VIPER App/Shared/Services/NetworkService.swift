@@ -32,8 +32,8 @@ final class NetworkService: NetworkServiceProtocol {
     
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = MagicNumber.x10
-        config.timeoutIntervalForResource = MagicNumber.x10
+        config.timeoutIntervalForRequest = 40
+        config.timeoutIntervalForResource = 40
         return URLSession(configuration: config)
     }()
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MainViewConfigurator: NSObject, BuilderProtocol {
+final class MainViewConfigurator: NSObject {
     
     func configure() -> UIViewController {
         

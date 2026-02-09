@@ -11,11 +11,17 @@ final class DetailViewConfigurator: NSObject {
     
     func configure(image: UIImage?) -> UIViewController {
         
+        let networkService = NetworkService.shared
+        
+        let imageLoaderService = ImageLoaderService()
+        
         let viewController = DetailViewController()
         
         let router = DetailRouter(transitionHandler: viewController)
         
-        let interactor = DetailInteractor()
+        let interactor = DetailInteractor(
+            networkService: networkService,
+            imageLoaderService: imageLoaderService)
         
         let presenter = DetailPresenter(
             view: viewController,

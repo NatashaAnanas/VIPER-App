@@ -11,5 +11,7 @@ protocol DetailViewInput: AnyObject {
     
     func setupInitialState()
     
-    func updateView(_ image: UIImage)
+    func updateView(image: UIImage)
+    
+    func updateRandomImage(randomImage: UIImage)
 }

@@ -9,30 +9,21 @@ import UIKit
 
 final class DetailPresenter {
     
-    private let image: UIImage?
-    
-    // MARK: Dependencies
-    
     private weak var view: DetailViewInput?
     private let interactor: DetailInteractorInput
     private let router: DetailRouterInput
+    private let image: UIImage?
     
-    // MARK: Init
-    
-    init(view: DetailViewInput,
-         interactor: DetailInteractorInput,
-         router: DetailRouterInput,
-         image: UIImage?) {
+    init(
+        view: DetailViewInput,
+        interactor: DetailInteractorInput,
+        router: DetailRouterInput,
+        image: UIImage?
+    ) {
         self.view = view
         self.interactor = interactor
         self.router = router
         self.image = image
-    }
-    
-    private func setupImageView() {
-        if let image = self.image  {
-            view?.updateView(image)
-        }
     }
 }
 
@@ -42,6 +33,24 @@ extension DetailPresenter: DetailViewOutput {
     
     func viewIsReady() {
         view?.setupInitialState()
-        setupImageView()
+        
+        if let image {
+            view?.updateView(image: image)
+        }
+        fetchRandomImage()
+    }
+    
+    func fetchRandomImage() {
+        interactor.fetchInfo { [weak self] result in
+            switch result {
+            case .success(let model):
+                self?.interactor.loadImage(from: model.message) { image in
+                    guard let image else { return }
+                    self?.view?.updateRandomImage(randomImage: image)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
