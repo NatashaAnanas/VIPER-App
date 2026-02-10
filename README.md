@@ -1,6 +1,20 @@
 # VIPER App (Swift, UIKit) 🐶
 
 Учебное iOS-приложение на Swift + UIKit, реализованное с использованием архитектурного паттерна **VIPER** (View–Interactor–Presenter–Entity–Router).  
+```mermaid
+flowchart LR
+    View -->|User actions| Presenter
+    Presenter -->|View updates| View
+
+    Presenter -->|Requests data| Interactor
+    Interactor -->|Returns data| Presenter
+
+    Interactor -->|Business objects| Entity
+
+    Presenter -->|Navigation| Router
+    Router -->|Creates module| View
+```
+
 
 Приложение состоит из двух экранов: список изображений собак и детальный просмотр выбранного изображения. Может использоваться как пример для изучения VIPER, роутинга и базовой сетевой логики.
 
@@ -78,6 +92,49 @@ struct RandomDogModel: Codable {
 - Проверка NSCache перед загрузкой изображения.
 - Если изображение есть в кеше — используется сразу.
 - Если нет — загружается через сеть, сохраняется в кеш и отображается.
+
+```mermaid
+flowchart TB
+    App[AppDelegate / SceneDelegate]
+    App --> MainModule[Main VIPER Module]
+
+    MainModule -->|Push| DetailModule[Detail VIPER Module]
+
+    subgraph Main VIPER
+        MainView
+        MainPresenter
+        MainInteractor
+        MainRouter
+        MainEntity
+    end
+
+    subgraph Detail VIPER
+        DetailView
+        DetailPresenter
+        DetailInteractor
+        DetailRouter
+        DetailEntity
+    end
+
+    MainView --> MainPresenter
+    MainPresenter --> MainView
+
+    MainPresenter --> MainInteractor
+    MainInteractor --> MainPresenter
+
+    MainInteractor --> MainEntity
+
+    MainPresenter --> MainRouter
+
+    DetailView --> DetailPresenter
+    DetailPresenter --> DetailView
+
+    DetailPresenter --> DetailInteractor
+    DetailInteractor --> DetailPresenter
+
+    DetailInteractor --> DetailEntity
+    DetailPresenter --> DetailRouter
+```
 
 ## Используемые технологии
 - Swift 5+
